@@ -149,14 +149,16 @@ local AbilityData = {
 
 -- Удаление старого GUI
 pcall(function()
+    repeat task.wait() until LocalPlayer.PlayerGui
     if LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI") then
         LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI"):Destroy()
     end
 end)
 
-wait(0.3)
+task.wait(0.3)
 
 -- Создание GUI
+repeat task.wait() until LocalPlayer.PlayerGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "BladeBallGUI"
 ScreenGui.ResetOnSpawn = false
@@ -458,6 +460,7 @@ local function CreateParryTimerLabel()
     ParryTimerLabel.Font = Enum.Font.GothamBold
     ParryTimerLabel.Text = "Ready"
     ParryTimerLabel.Visible = false
+    repeat task.wait() until LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
     ParryTimerLabel.Parent = LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
     
     local corner = Instance.new("UICorner")
@@ -483,6 +486,7 @@ local function CreateAbilityCooldownLabel()
     AbilityCooldownLabel.Font = Enum.Font.GothamBold
     AbilityCooldownLabel.Text = "🔮 Ready"
     AbilityCooldownLabel.Visible = false
+    repeat task.wait() until LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
     AbilityCooldownLabel.Parent = LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
     
     local corner = Instance.new("UICorner")
@@ -2031,4 +2035,3 @@ print("  • 🔮 Intelligent abilities: Priority-based usage")
 print("  • 🎲 Chaos Mode: Unpredictable movements (AUTO/ON/OFF)")
 print("  • 🎪 Trick Mode: Stylish parries (AUTO/ON/OFF)")
 print("💡 AUTO mode = AI decides when to use tricks!")
-
