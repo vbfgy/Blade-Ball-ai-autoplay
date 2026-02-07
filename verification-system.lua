@@ -293,8 +293,9 @@ VerifyBtn.MouseButton1Click:Connect(function()
         -- Загружаем основной скрипт
         print("✅ Verification successful! Loading Blade Ball AutoPlay...")
         
-        -- Загрузка с GitHub
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/vbfgy/Blade-Ball-ai-autoplay/refs/heads/main/blade-ball-autoplay.lua"))()
+        -- Загрузка с GitHub (с обходом кэша)
+        local timestamp = tick()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/vbfgy/Blade-Ball-ai-autoplay/refs/heads/main/blade-ball-autoplay.lua?t=" .. timestamp))()
         
     else
         -- Неверный ключ
