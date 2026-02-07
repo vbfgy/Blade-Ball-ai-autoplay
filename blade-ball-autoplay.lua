@@ -3,20 +3,16 @@
     Одна кнопка - полная автоматизация!
 ]]
 
--- Ждем загрузки персонажа
 local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-if not LocalPlayer.Character then
-    LocalPlayer.CharacterAdded:Wait()
-end
-
-wait(1) -- Дополнительная задержка для полной загрузки
-
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Ждем персонажа если его нет
+repeat task.wait() until LocalPlayer.Character
+task.wait(0.5)
 
 -- Настройки
 local Settings = {
@@ -2035,3 +2031,4 @@ print("  • 🔮 Intelligent abilities: Priority-based usage")
 print("  • 🎲 Chaos Mode: Unpredictable movements (AUTO/ON/OFF)")
 print("  • 🎪 Trick Mode: Stylish parries (AUTO/ON/OFF)")
 print("💡 AUTO mode = AI decides when to use tricks!")
+
