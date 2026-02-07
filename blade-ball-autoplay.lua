@@ -149,20 +149,20 @@ local AbilityData = {
 
 -- Удаление старого GUI
 pcall(function()
-    repeat task.wait() until LocalPlayer.PlayerGui
-    if LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI") then
-        LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI"):Destroy()
+    local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+    if playerGui:FindFirstChild("BladeBallGUI") then
+        playerGui:FindFirstChild("BladeBallGUI"):Destroy()
     end
 end)
 
 task.wait(0.3)
 
 -- Создание GUI
-repeat task.wait() until LocalPlayer.PlayerGui
+local playerGui = LocalPlayer:WaitForChild("PlayerGui")
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "BladeBallGUI"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = LocalPlayer.PlayerGui
+ScreenGui.Parent = playerGui
 
 local MainFrame = Instance.new("Frame")
 MainFrame.Size = UDim2.new(0, 350, 0, 350)
@@ -460,8 +460,9 @@ local function CreateParryTimerLabel()
     ParryTimerLabel.Font = Enum.Font.GothamBold
     ParryTimerLabel.Text = "Ready"
     ParryTimerLabel.Visible = false
-    repeat task.wait() until LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
-    ParryTimerLabel.Parent = LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
+    local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+    local bladeBallGUI = playerGui:WaitForChild("BladeBallGUI")
+    ParryTimerLabel.Parent = bladeBallGUI
     
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, 10)
@@ -486,8 +487,9 @@ local function CreateAbilityCooldownLabel()
     AbilityCooldownLabel.Font = Enum.Font.GothamBold
     AbilityCooldownLabel.Text = "🔮 Ready"
     AbilityCooldownLabel.Visible = false
-    repeat task.wait() until LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
-    AbilityCooldownLabel.Parent = LocalPlayer.PlayerGui:FindFirstChild("BladeBallGUI")
+    local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+    local bladeBallGUI = playerGui:WaitForChild("BladeBallGUI")
+    AbilityCooldownLabel.Parent = bladeBallGUI
     
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, 8)
@@ -816,8 +818,9 @@ local function DetectAbility()
         end
         
         -- Пробуем найти в PlayerGui
-        if LocalPlayer.PlayerGui:FindFirstChild("Hotbar") then
-            local hotbar = LocalPlayer.PlayerGui.Hotbar
+        local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+        if playerGui:FindFirstChild("Hotbar") then
+            local hotbar = playerGui.Hotbar
             if hotbar:FindFirstChild("Block") and hotbar.Block:FindFirstChild("Ability") then
                 local abilityFrame = hotbar.Block.Ability
                 -- Ищем название способности
