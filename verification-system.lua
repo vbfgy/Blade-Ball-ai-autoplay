@@ -55,8 +55,9 @@ end
 
 -- Удаляем старый GUI если есть
 pcall(function()
-    if LocalPlayer.PlayerGui:FindFirstChild("VerificationGUI") then
-        LocalPlayer.PlayerGui:FindFirstChild("VerificationGUI"):Destroy()
+    local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+    if playerGui:FindFirstChild("VerificationGUI") then
+        playerGui:FindFirstChild("VerificationGUI"):Destroy()
     end
 end)
 
@@ -67,7 +68,8 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "VerificationGUI"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.Parent = LocalPlayer.PlayerGui
+local playerGui = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = playerGui
 
 -- Затемнение фона
 local Overlay = Instance.new("Frame")
